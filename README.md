@@ -59,3 +59,7 @@ start webpack notes for webpack
         overlay: true, // WDS provides an overlay for capturing compilation related warning and errors
     }
   ```
+  ## composing the webpack config by merging 
+    Object.assign , array.concat, webpack-merge can be used. 
+
+    npm install webpack-merge --save-dev

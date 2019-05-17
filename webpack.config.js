@@ -1,20 +1,37 @@
 const path = require('path');
 const htmlPlugin = require('html-webpack-plugin');
+const merge = require('webpack-merge');
+const parts = require('./webpack.parts');
 
-module.exports = {
+const htmlPluginConfig = merge([{
+    plugins: [
+        new htmlPlugin({
+            title: 'Webpack Demo'
+        })
+    ],
+}])
+
+const prodConfig = merge([]);
+
+const developmentConfig = merge([
+    parts.devServer({
+        host: process.env.HOST,
+        port: process.env.PORT
+    })
+]);
+
+const commonConfig = merge([{
     entry: './src/index.js',
     output: {
         filename: 'main.js',
         path: path.join(__dirname, 'dist')
-    },
-    plugins: [
-        new htmlPlugin()
-    ],
-    devServer: {
-        stats: 'errors-only', //display only errors to reduce the amount of output
-        host: process.env.HOST, //default to localhost
-        port: process.env.PORT, // default 8080
-        open: true, // open the page in browser auto,
-        overlay: true, // WDS provides an overlay for capturing compilation related warning and errors
     }
-};
+}])
+
+module.exports = mode => {
+    if (mode === 'production') {
+        return merge(commonConfig, htmlPluginConfig, prodConfig, { mode });
+    }
+    console.log(merge(commonConfig, htmlPluginConfig, developmentConfig, { mode }));
+    return merge(commonConfig, htmlPluginConfig, developmentConfig, { mode });
+}
