@@ -40,3 +40,22 @@ start webpack notes for webpack
         new htmlPlugin()
     ]
   ```
+## webpack watch mode and webpack-dev-server(WDS) 
+  watch mode can detects the code changes and recompiles automatically. 
+  npm run build -- --watch
+  WDC implements a watch mode and goes even further
+  npm install webpack-dev-server --save-dev
+
+  after installed, will add one command into node_modules/.bin folder and can run webpack-dev-server command to start use default options. 
+
+  also can config the WDS options into webpack.config file 
+
+  ```
+  devServer: {
+        stats: 'errors-only', //display only errors to reduce the amount of output
+        host: process.env.HOST, //default to localhost
+        port: process.env.PORT, // default 8080
+        open: true, // open the page in browser auto,
+        overlay: true, // WDS provides an overlay for capturing compilation related warning and errors
+    }
+  ```
