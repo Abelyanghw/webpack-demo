@@ -29,9 +29,14 @@ start webpack notes for webpack
    "build": "webpack"
    ```
    npm run build -- this command can build the bundle files too. 
-
    
+## diff webpack development and production mode
 
-
- 
-
+   production mode can generate optimize , minimize source code. 
+## use html plugin 
+   ```
+   const htmlPlugin = require('html-webpack-plugin');
+   plugins: [
+        new htmlPlugin()
+    ]
+  ```
