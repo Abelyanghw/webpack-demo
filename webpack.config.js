@@ -26,12 +26,16 @@ const commonConfig = merge([{
         filename: 'main.js',
         path: path.join(__dirname, 'dist')
     }
-}])
+}, parts.loadCss({
+    exclude: /node_modules/
+})]);
+
+console.log(commonConfig);
 
 module.exports = mode => {
     if (mode === 'production') {
         return merge(commonConfig, htmlPluginConfig, prodConfig, { mode });
     }
-    console.log(merge(commonConfig, htmlPluginConfig, developmentConfig, { mode }));
+    // console.log(merge(commonConfig, htmlPluginConfig, developmentConfig, { mode }));
     return merge(commonConfig, htmlPluginConfig, developmentConfig, { mode });
 }

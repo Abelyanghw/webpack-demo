@@ -7,3 +7,14 @@ exports.devServer = ({ host, port } = {}) => ({
         overlay: true, // WDS provides an overlay for capturing compilation related warning and errors
     }
 });
+
+exports.loadCss = ({ include, exclude } = {}) => ({
+    module: {
+        rules: [{
+            test: /\.css$/,
+            include,
+            exclude,
+            use: ['style-loader', 'css-loader']
+        }]
+    }
+});

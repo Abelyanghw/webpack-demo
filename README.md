@@ -59,7 +59,62 @@ start webpack notes for webpack
         overlay: true, // WDS provides an overlay for capturing compilation related warning and errors
     }
   ```
-  ## composing the webpack config by merging 
+## composing the webpack config by merging 
     Object.assign , array.concat, webpack-merge can be used. 
 
     npm install webpack-merge --save-dev
+
+## Css loader
+  - style & css loader
+   npm install css-loader style-loader --save-dev
+   then config the css loader in webpack config 
+   ```
+   exports.loadCss = ({ include, exclude } = {}) => ({
+    module: {
+        rules: [{
+            test: /\.css$/,
+            include,
+            exclude,
+            use: ['style-loader', 'css-loader']
+        }]
+    }
+   });
+   ```
+   merge into the common config
+   ```
+   merge([..., parts.loadCss({
+    exclude: /node_modules/
+   }]);
+   ```
+   - less loader 
+   npm install less-loader --save-dev
+   ```
+   {
+     test: /\.less$/,
+     use: ["style-loader", "css-loader", "less-loader"]
+   }
+   ```
+   - sass-loader 
+   npm install node-sass sass-loader --save-dev 
+   ```
+   {
+     test: /\.scss$/,
+     use: ["style-loader", "css-loader", "sass-loader"]
+   }
+   ```
+   -postcss loader 
+   npm install postcss-loader
+   ```
+   {
+     test: /\.css$/,
+     use: ["style-loader", "css-loader", {
+       loader: "postcss-loader",
+       options: {
+         plugins: () => ([require('autoprefixer'), require('precss')])
+       }
+     }]
+   }
+   ```
+
+# appendix 
+  [webpack online survivejs.com](https://survivejs.com/webpack)
