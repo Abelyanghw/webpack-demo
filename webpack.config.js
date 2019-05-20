@@ -15,6 +15,9 @@ const htmlPluginConfig = merge([{
 const prodConfig = merge([
     parts.extractCss({
         use: 'css-loader',
+    }),
+    parts.generateSourceMaps({
+        type: 'source-map'
     })
 ])
 

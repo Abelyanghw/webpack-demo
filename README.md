@@ -158,7 +158,7 @@ start webpack notes for webpack
   - loader for image 
   ```
   {
-    test:/\/(jpg|png)$/,
+    test:/\.(jpg|png)$/,
     use: {
       loader: "url-loader",
       options: {
@@ -167,5 +167,34 @@ start webpack notes for webpack
     }
   }
   ```
+  - file loader
+  ```
+  {
+    test: /\.(jpg|png)$/
+    use: {
+      loader: 'file-loader',
+      options: {
+        name: "[path][name].[hash].[ext]"
+      }
+    }
+  }
+  ```
+  - loading a font 
+  ```
+  {
+    test: /\.woff$/,
+    use: {
+
+      loader: 'url-loader',
+      options: {
+        limit: 50000,
+      }
+    }
+  }
+  ```
+ ## Enable source map on the build 
+    source map can solve the debugging problem in chrome, which providing a mapping between the original and transformed source code. 
+    
+ 
 # appendix 
   [webpack online survivejs.com](https://survivejs.com/webpack)
