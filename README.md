@@ -195,6 +195,13 @@ start webpack notes for webpack
  ## Enable source map on the build 
     source map can solve the debugging problem in chrome, which providing a mapping between the original and transformed source code. 
     
+    ```
+    exports.generateSourceMaps = ({type}) => ({
+      devtool: type
+    });
+
+    parts.generateSourceMaps({type: 'source-map'});
+ 
  
 # appendix 
   [webpack online survivejs.com](https://survivejs.com/webpack)
