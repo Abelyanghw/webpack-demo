@@ -1,3 +1,5 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 exports.devServer = ({ host, port } = {}) => ({
     devServer: {
         stats: 'errors-only', //display only errors to reduce the amount of output
@@ -15,6 +17,34 @@ exports.loadCss = ({ include, exclude } = {}) => ({
             include,
             exclude,
             use: ['style-loader', 'css-loader']
+        }]
+    }
+});
+
+exports.extractCss = ({ include, exclude, use = [] }) => {
+    const plugin = new MiniCssExtractPlugin({
+        fileName: '[name].css',
+    });
+    return {
+        module: {
+            rules: [{
+                test: /\.css$/,
+                include,
+                exclude,
+                use: [MiniCssExtractPlugin.loader].concat(use)
+            }]
+        },
+        plugins: [plugin]
+    }
+};
+
+exports.loadJs = ({ include, exclude } = {}) => ({
+    module: {
+        rules: [{
+            test: /\.js$/,
+            include,
+            exclude,
+            use: ['babel-loader']
         }]
     }
 });

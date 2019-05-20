@@ -115,6 +115,57 @@ start webpack notes for webpack
      }]
    }
    ```
-
+## MCEP mini-css-extract-plugin
+   extract multiple css file into a seprate one. 
+   npm install mini-css-extract-plugin --save-dev
+   ```
+   exports.extractCss = ({ include, exclude, use = [] }) => {
+    const plugin = new MiniCssExtractPlugin({
+        fileName: '[name].css',
+    });
+    return {
+        module: {
+            rules: [{
+                test: /\.css$/,
+                include,
+                exclude,
+                use: [MiniCssExtractPlugin.loader].concat(use)
+            }]
+        },
+        plugins: [plugin]
+    }
+   };
+   ```
+   ```
+   const prodConfig = merge([
+    parts.extractCss({
+        use: 'css-loader',
+    })
+   ])
+   ```
+## Loading Assets 
+  using webpack's loaders,escpecially images, fonts, and javascript receive particular attention. 
+  can use 'use' or 'context' field 
+  - Anatomy of a loader 
+  ```
+  include: path.join(__dirname, 'app'),
+  exclude(path) {
+    return path.match(/node_modules/);
+  }
+  ```
+  - loader Evaluation order
+  webpack loader always evaluated from right to left and from bottom to top. 
+  - loader for image 
+  ```
+  {
+    test:/\/(jpg|png)$/,
+    use: {
+      loader: "url-loader",
+      options: {
+        limit: 25000
+      }
+    }
+  }
+  ```
 # appendix 
   [webpack online survivejs.com](https://survivejs.com/webpack)

@@ -11,13 +11,25 @@ const htmlPluginConfig = merge([{
     ],
 }])
 
-const prodConfig = merge([]);
+//const prodConfig = merge([]);
+const prodConfig = merge([
+    parts.extractCss({
+        use: 'css-loader',
+    })
+])
 
 const developmentConfig = merge([
+    parts.loadJs({
+        include: path.join(__dirname, 'src'),
+        exclude(path) {
+            return path.match(/node_modules/);
+        }
+    }),
     parts.devServer({
         host: process.env.HOST,
         port: process.env.PORT
-    })
+    }),
+    parts.loadCss({ exclude: /node_modules/ })
 ]);
 
 const commonConfig = merge([{
@@ -26,9 +38,9 @@ const commonConfig = merge([{
         filename: 'main.js',
         path: path.join(__dirname, 'dist')
     }
-}, parts.loadCss({
-    exclude: /node_modules/
-})]);
+}]);
+
+//parts.loadCss({exclude: /node_modules/})
 
 console.log(commonConfig);
 
