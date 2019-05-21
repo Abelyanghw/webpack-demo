@@ -228,6 +228,69 @@ start webpack notes for webpack
   ```
 ## clean build directory  
  npm install clean-webpack-plugin --save-dev
- 
+
+## minifying js 
+  webpack4.0, minification process is controlled through two configuration fields: 
+  optimization.minimize , optimization.minimizer 
+
+  npm install terser-webpack-plugin --save-dev
+  
+  ```
+  exports.minifyJavascript = () => ({
+    optimization: {
+        minimizer: [new TerserPlugin({ sourceMap: true })]
+    }
+  })
+  ```
+  other ways: 
+  1. babel-minify-webpack-plugin babel-preset-minify
+  2. webpack-closure-compiler 
+  3. butternut-webpack-plugin
+
+## minifying css 
+  npm install optimize-css-assets-webpack-plugin cssnano --save-dev
+
+  ```
+  exports.minifyCss = ({ options }) => ({
+    plugins: [new OptimizeCssAssetsPlugin({
+        cssProcessor: cssnano,
+        cssProcessorOption: options,
+        canPrint: true
+    })]
+  });
+  ```
+  the parameter options: 
+
+  ```
+  parts.minifyCss({
+        options: {
+            discardComments: {
+                removeAll: true
+            }
+        },
+        safe: true
+    })
+  ```
+## Tree shaking
+  it's a feature enabled by ES2015 module definition. 
+  some module export can't be used in other module
+## Hashes to Filenames
+  Placeholder 
+  - [id] - return the chunk id
+  - [path] - return the file path
+  - [name] - return the file name
+  - [ext] - return the extension
+  - [hash] - return the build hash
+  - [chunkhash] - return an entry chunk-specific hash 
+  - [contenthash] - return a hash generated based on content
+
+  ```
+  {
+    output:{
+      path: PATH.BUILD
+      filename: '[name].[chunkhash].js'
+  }}
+  ```
+  
 # appendix 
   [webpack online survivejs.com](https://survivejs.com/webpack)

@@ -32,7 +32,16 @@ const prodConfig = merge([
             }
         }
     },
-    parts.clean()
+    parts.clean(),
+    parts.minifyJavascript(),
+    parts.minifyCss({
+        options: {
+            discardComments: {
+                removeAll: true
+            }
+        },
+        safe: true
+    })
 ])
 
 const developmentConfig = merge([
@@ -52,7 +61,7 @@ const developmentConfig = merge([
 const commonConfig = merge([{
     entry: './src/index.js',
     output: {
-        filename: 'main.js',
+        filename: '[name].[chunkhash].js',
         path: path.join(__dirname, 'dist')
     }
 }]);
@@ -67,4 +76,4 @@ module.exports = mode => {
     }
     // console.log(merge(commonConfig, htmlPluginConfig, developmentConfig, { mode }));
     return merge(commonConfig, htmlPluginConfig, developmentConfig, { mode });
-}
+};
