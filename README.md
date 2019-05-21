@@ -201,6 +201,25 @@ start webpack notes for webpack
     });
 
     parts.generateSourceMaps({type: 'source-map'});
+
+## setup a vendor bundle , and implement the bundle spliting 
+   you can use CommonsChunkPlugin for managing the bundle splitting and it's replaced with automation and configuration after webpack4.0 
+
+   ```
+   const prodConfig = merge([
+     ...
+     {optimization: {
+       splitChunks: {
+         chunks: 'initial'
+       }
+     }}
+   ])
+   ```
+   please note the cacheGroups field for chunks.
+
+## code splitting
+  npm install @babel/plugin-syntax-dynamic-import --save-dev
+  
  
  
 # appendix 
