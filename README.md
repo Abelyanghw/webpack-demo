@@ -220,7 +220,14 @@ start webpack notes for webpack
 ## code splitting
   npm install @babel/plugin-syntax-dynamic-import --save-dev
   
- 
+  setup .babelrc
+  ```
+  {
+    "plugins": ["@babel/plugin-syntax-dynamic-import"],
+  }
+  ```
+## clean build directory  
+ npm install clean-webpack-plugin --save-dev
  
 # appendix 
   [webpack online survivejs.com](https://survivejs.com/webpack)

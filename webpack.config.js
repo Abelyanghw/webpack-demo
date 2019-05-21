@@ -31,7 +31,8 @@ const prodConfig = merge([
                 }
             }
         }
-    }
+    },
+    parts.clean()
 ])
 
 const developmentConfig = merge([

@@ -1,4 +1,9 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+exports.clean = path => ({
+    plugins: [new CleanWebpackPlugin()]
+})
 
 exports.devServer = ({ host, port } = {}) => ({
     devServer: {
